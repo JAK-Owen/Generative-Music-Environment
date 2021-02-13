@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<button> START </button>
+
+<script src='https://cdnjs.cloudflare.com/ajax/libs/tone/14.7.6/Tone.js'></script>
+
+<script>
+
+
+Tone.Transport.bpm.value = 65;
+
+
+  const synth1 = new Tone.Synth();
+  synth1.oscillator.type = 'sawtooth';
+  synth1.toDestination();
+
+
+  const pattern1 =
+  ['d#4', 'f4', 'a#4', 'c#4'];
+
+
+var index = 0;
+
+Tone.Transport.scheduleRepeat(time => {
+  repeat(time);
+}, '4n');
+
+
+
+
+
+function repeat(time) {
+  let note = pattern1[Math.floor(Math.random() * pattern1.length)];
+  synth1.triggerAttackRelease(note, '4n', time);
+  index++;
+}
+Tone.Transport.start();
+
+
+
+
+///////////////////////////////////////////////
+
+const synth2 = new Tone.Synth();
+synth2.oscillator.type = 'sawtooth';
+synth2.toDestination();
+
+const pattern2 =
+['d#3', 'f3', 'a#3', 'c#3'];
+
+var index = 0;
+
+Tone.Transport.scheduleRepeat(time => {
+repeat2(time);
+}, '2n');
+
+
+
+
+
+function repeat2(time) {
+let note = pattern2[Math.floor(Math.random() * pattern2.length)];
+synth2.triggerAttackRelease(note, '2n', time);
+index++;
+}
+
+
+
+///////////////////////////////////////////////
+
+const synth3 = new Tone.Synth();
+synth3.oscillator.type = 'sawtooth';
+synth3.toDestination();
+
+const pattern3 =
+['d#2', 'f2', 'a#2', 'c#2'];
+
+var index = 0;
+
+Tone.Transport.scheduleRepeat(time => {
+repeat3(time);
+}, '1n');
+
+
+
+
+
+function repeat3(time) {
+let note = pattern3[Math.floor(Math.random() * pattern3.length)];
+synth3.triggerAttackRelease(note, '1n', time);
+index++;
+}
+
+
+
+
+
+  document.querySelector('button')?.addEventListener('click', async () => {
+      await Tone.start()
+  })
+
+
+
+
+</script>
+
+</body>
+</html>
