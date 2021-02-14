@@ -9,17 +9,36 @@
 <script>
 
 
-Tone.Transport.bpm.value = 65;
+Tone.Transport.bpm.value = 32.5;
 
 
-  const synth1 = new Tone.Synth();
-  synth1.oscillator.type = 'sawtooth';
+  const synth1 = new Tone.Synth({
+
+    "volume": -8,
+  "oscillator": {
+    "type": "triangle"
+  },
+  "envelope": {
+    "attack": 0.8,
+    "decay": 10.0,
+    "sustain": 0.0,
+    "release": 10.0,
+  },
+  "filterEnvelope": {
+    "attack": 0.8,
+    "decay": 10.0,
+    "sustain": 0.0,
+    "release": 10.0,
+    "baseFrequency": 300,
+    "octaves": 4
+  }});
+
   synth1.toDestination();
 
 
-  const pattern1 =
-  ['d#4', 'f4', 'a#4', 'c#4'];
 
+  const pattern1 =
+  ['d#2', 'd#3', 'd#4', 'd#5'];
 
 var index = 0;
 
@@ -27,28 +46,43 @@ Tone.Transport.scheduleRepeat(time => {
   repeat(time);
 }, '4n');
 
-
-
-
-
 function repeat(time) {
   let note = pattern1[Math.floor(Math.random() * pattern1.length)];
   synth1.triggerAttackRelease(note, '4n', time);
+  synth1.envelope.triggerAttackRelease("4n");
   index++;
 }
 Tone.Transport.start();
 
-
-
-
 ///////////////////////////////////////////////
 
-const synth2 = new Tone.Synth();
-synth2.oscillator.type = 'sawtooth';
+const synth2 = new Tone.Synth({
+
+  "volume": -8,
+"oscillator": {
+  "type": "triangle"
+},
+"envelope": {
+  "attack": 0.8,
+  "decay": 10.0,
+  "sustain": 0.0,
+  "release": 10.0,
+},
+"filterEnvelope": {
+  "attack": 0.8,
+  "decay": 10.0,
+  "sustain": 0.0,
+  "release": 10.0,
+  "baseFrequency": 300,
+  "octaves": 4
+}});
+
 synth2.toDestination();
 
+
+
 const pattern2 =
-['d#3', 'f3', 'a#3', 'c#3'];
+['f#2', 'f#3', 'f#4', 'f#5'];
 
 var index = 0;
 
@@ -56,26 +90,43 @@ Tone.Transport.scheduleRepeat(time => {
 repeat2(time);
 }, '2n');
 
-
-
-
-
 function repeat2(time) {
 let note = pattern2[Math.floor(Math.random() * pattern2.length)];
 synth2.triggerAttackRelease(note, '2n', time);
+synth2.envelope.triggerAttackRelease("2n");
 index++;
 }
 
 
-
 ///////////////////////////////////////////////
 
-const synth3 = new Tone.Synth();
-synth3.oscillator.type = 'sawtooth';
+const synth3 = new Tone.Synth({
+
+  "volume": -8,
+"oscillator": {
+  "type": "triangle"
+},
+"envelope": {
+  "attack": 0.8,
+  "decay": 10.0,
+  "sustain": 0.0,
+  "release": 10.0,
+},
+"filterEnvelope": {
+  "attack": 0.8,
+  "decay": 10.0,
+  "sustain": 0.0,
+  "release": 10.0,
+  "baseFrequency": 300,
+  "octaves": 4
+}});
+
 synth3.toDestination();
 
+
+
 const pattern3 =
-['d#2', 'f2', 'a#2', 'c#2'];
+['f#2', 'f#3', 'f#4', 'f#5'];
 
 var index = 0;
 
@@ -83,15 +134,13 @@ Tone.Transport.scheduleRepeat(time => {
 repeat3(time);
 }, '1n');
 
-
-
-
-
 function repeat3(time) {
 let note = pattern3[Math.floor(Math.random() * pattern3.length)];
 synth3.triggerAttackRelease(note, '1n', time);
+synth3.envelope.triggerAttackRelease("1n");
 index++;
 }
+
 
 
 
