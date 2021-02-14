@@ -35,8 +35,6 @@ Tone.Transport.bpm.value = 32.5;
 
   synth1.toDestination();
 
-
-
   const pattern1 =
   ['d#2', 'd#3', 'd#4', 'd#5'];
 
@@ -44,12 +42,12 @@ var index = 0;
 
 Tone.Transport.scheduleRepeat(time => {
   repeat(time);
-}, '4n');
+}, '1n');
 
 function repeat(time) {
   let note = pattern1[Math.floor(Math.random() * pattern1.length)];
-  synth1.triggerAttackRelease(note, '4n', time);
-  synth1.envelope.triggerAttackRelease("4n");
+  synth1.triggerAttackRelease(note, '1n', time);
+  synth1.envelope.triggerAttackRelease("1n");
   index++;
 }
 Tone.Transport.start();
@@ -79,24 +77,21 @@ const synth2 = new Tone.Synth({
 
 synth2.toDestination();
 
-
-
 const pattern2 =
-['f#2', 'f#3', 'f#4', 'f#5'];
+['f#3', 'f#4', 'f#5'];
 
 var index = 0;
 
 Tone.Transport.scheduleRepeat(time => {
 repeat2(time);
-}, '2n');
+}, '1n');
 
 function repeat2(time) {
 let note = pattern2[Math.floor(Math.random() * pattern2.length)];
-synth2.triggerAttackRelease(note, '2n', time);
-synth2.envelope.triggerAttackRelease("2n");
+synth2.triggerAttackRelease(note, '1n', time);
+synth2.envelope.triggerAttackRelease("1n");
 index++;
 }
-
 
 ///////////////////////////////////////////////
 
@@ -123,10 +118,8 @@ const synth3 = new Tone.Synth({
 
 synth3.toDestination();
 
-
-
 const pattern3 =
-['f#2', 'f#3', 'f#4', 'f#5'];
+['a#2', 'a#3', 'a#4', 'a#5'];
 
 var index = 0;
 
@@ -141,6 +134,87 @@ synth3.envelope.triggerAttackRelease("1n");
 index++;
 }
 
+///////////////////////////////////////////////
+
+const synth4 = new Tone.Synth({
+
+  "volume": -8,
+"oscillator": {
+  "type": "triangle"
+},
+"envelope": {
+  "attack": 0.8,
+  "decay": 10.0,
+  "sustain": 0.0,
+  "release": 10.0,
+},
+"filterEnvelope": {
+  "attack": 0.8,
+  "decay": 10.0,
+  "sustain": 0.0,
+  "release": 10.0,
+  "baseFrequency": 300,
+  "octaves": 4
+}});
+
+synth4.toDestination();
+
+const pattern4 =
+['g#3', 'g#4', 'g#5'];
+
+var index = 0;
+
+Tone.Transport.scheduleRepeat(time => {
+repeat4(time);
+}, '1n');
+
+function repeat4(time) {
+let note = pattern4[Math.floor(Math.random() * pattern4.length)];
+synth4.triggerAttackRelease(note, '1n', time);
+synth4.envelope.triggerAttackRelease("1n");
+index++;
+}
+
+///////////////////////////////////////////////
+
+const synth5 = new Tone.Synth({
+
+  "volume": -8,
+"oscillator": {
+  "type": "triangle"
+},
+"envelope": {
+  "attack": 0.8,
+  "decay": 10.0,
+  "sustain": 0.0,
+  "release": 10.0,
+},
+"filterEnvelope": {
+  "attack": 0.8,
+  "decay": 10.0,
+  "sustain": 0.0,
+  "release": 10.0,
+  "baseFrequency": 300,
+  "octaves": 4
+}});
+
+synth5.toDestination();
+
+const pattern5 =
+['c#3', 'c#4', 'c#5'];
+
+var index = 0;
+
+Tone.Transport.scheduleRepeat(time => {
+repeat5(time);
+}, '1n');
+
+function repeat5(time) {
+let note = pattern5[Math.floor(Math.random() * pattern5.length)];
+synth5.triggerAttackRelease(note, '1n', time);
+synth5.envelope.triggerAttackRelease("1n");
+index++;
+}
 
 
 
