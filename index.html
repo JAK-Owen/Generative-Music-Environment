@@ -20,15 +20,15 @@ Tone.Transport.bpm.value = 32.5;
   },
   "envelope": {
     "attack": 0.8,
-    "decay": 10.0,
+    "decay": 20.0,
     "sustain": 0.0,
-    "release": 10.0,
+    "release": 20.0,
   },
   "filterEnvelope": {
     "attack": 0.8,
-    "decay": 10.0,
+    "decay": 20.0,
     "sustain": 0.0,
-    "release": 10.0,
+    "release": 20.0,
     "baseFrequency": 300,
     "octaves": 4
   }});
@@ -56,21 +56,21 @@ Tone.Transport.start();
 
 const synth2 = new Tone.Synth({
 
-  "volume": -8,
+  "volume": -10,
 "oscillator": {
   "type": "triangle"
 },
 "envelope": {
   "attack": 0.8,
-  "decay": 10.0,
+  "decay": 20.0,
   "sustain": 0.0,
-  "release": 10.0,
+  "release": 20.0,
 },
 "filterEnvelope": {
   "attack": 0.8,
-  "decay": 10.0,
+  "decay": 20.0,
   "sustain": 0.0,
-  "release": 10.0,
+  "release": 20.0,
   "baseFrequency": 300,
   "octaves": 4
 }});
@@ -97,21 +97,21 @@ index++;
 
 const synth3 = new Tone.Synth({
 
-  "volume": -8,
+  "volume": -9,
 "oscillator": {
   "type": "triangle"
 },
 "envelope": {
   "attack": 0.8,
-  "decay": 10.0,
+  "decay": 20.0,
   "sustain": 0.0,
-  "release": 10.0,
+  "release": 20.0,
 },
 "filterEnvelope": {
   "attack": 0.8,
-  "decay": 10.0,
+  "decay": 20.0,
   "sustain": 0.0,
-  "release": 10.0,
+  "release": 20.0,
   "baseFrequency": 300,
   "octaves": 4
 }});
@@ -138,26 +138,28 @@ index++;
 
 const synth4 = new Tone.Synth({
 
-  "volume": -8,
+  "volume": -10,
 "oscillator": {
   "type": "triangle"
 },
 "envelope": {
   "attack": 0.8,
-  "decay": 10.0,
+  "decay": 20.0,
   "sustain": 0.0,
-  "release": 10.0,
+  "release": 20.0,
 },
 "filterEnvelope": {
   "attack": 0.8,
-  "decay": 10.0,
+  "decay": 20.0,
   "sustain": 0.0,
-  "release": 10.0,
+  "release": 20.0,
   "baseFrequency": 300,
   "octaves": 4
 }});
 
-synth4.toDestination();
+const panner4 = new Tone.Panner(-1).toDestination();
+
+synth4.connect(panner4);
 
 const pattern4 =
 ['g#3', 'g#4', 'g#5'];
@@ -179,26 +181,28 @@ index++;
 
 const synth5 = new Tone.Synth({
 
-  "volume": -8,
+  "volume": -10,
 "oscillator": {
   "type": "triangle"
 },
 "envelope": {
   "attack": 0.8,
-  "decay": 10.0,
+  "decay": 20.0,
   "sustain": 0.0,
-  "release": 10.0,
+  "release": 20.0,
 },
 "filterEnvelope": {
   "attack": 0.8,
-  "decay": 10.0,
+  "decay": 20.0,
   "sustain": 0.0,
-  "release": 10.0,
+  "release": 20.0,
   "baseFrequency": 300,
   "octaves": 4
 }});
 
-synth5.toDestination();
+const panner5 = new Tone.Panner(1).toDestination();
+
+synth5.connect(panner5);
 
 const pattern5 =
 ['c#3', 'c#4', 'c#5'];
