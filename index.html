@@ -21,7 +21,7 @@ const delay = new Tone.FeedbackDelay("16n", 0.9).connect(reverb);
 
     "volume": -8,
   "oscillator": {
-    "type": "triangle"
+    "type": "sawtooth"
   },
   "envelope": {
     "attack": 0.8,
@@ -41,7 +41,7 @@ const delay = new Tone.FeedbackDelay("16n", 0.9).connect(reverb);
   synth1.connect(delay);
 
   const pattern1 =
-  ['d#2', 'd#3', 'd#4', 'd#5'];
+  ['d#1','d#2', 'd#3', 'd#4'];
 
 var index = 0;
 
@@ -63,7 +63,7 @@ const synth2 = new Tone.Synth({
 
   "volume": -10,
 "oscillator": {
-  "type": "triangle"
+  "type": "sawtooth"
 },
 "envelope": {
   "attack": 0.8,
@@ -104,7 +104,7 @@ const synth3 = new Tone.Synth({
 
   "volume": -9,
 "oscillator": {
-  "type": "triangle"
+  "type": "sawtooth"
 },
 "envelope": {
   "attack": 0.8,
@@ -124,7 +124,7 @@ const synth3 = new Tone.Synth({
 synth3.connect(delay);
 
 const pattern3 =
-['a#2', 'a#3', 'a#4', 'a#5'];
+['a#2', 'a#3', 'a#4'];
 
 var index = 0;
 
@@ -145,7 +145,7 @@ const synth4 = new Tone.Synth({
 
   "volume": -10,
 "oscillator": {
-  "type": "triangle"
+  "type": "sawtooth"
 },
 "envelope": {
   "attack": 0.8,
@@ -167,7 +167,7 @@ const panner4 = new Tone.Panner(-1).connect(delay);
 synth4.connect(panner4);
 
 const pattern4 =
-['g#3', 'g#4', 'g#5'];
+['g#3', 'g#4'];
 
 var index = 0;
 
@@ -188,7 +188,7 @@ const synth5 = new Tone.Synth({
 
   "volume": -10,
 "oscillator": {
-  "type": "triangle"
+  "type": "sawtooth"
 },
 "envelope": {
   "attack": 0.8,
@@ -210,7 +210,7 @@ const panner5 = new Tone.Panner(1).connect(delay);
 synth5.connect(panner5);
 
 const pattern5 =
-['c#3', 'c#4', 'c#5'];
+['c#3', 'c#4'];
 
 var index = 0;
 
@@ -225,7 +225,7 @@ synth5.envelope.triggerAttackRelease("1n");
 index++;
 }
 
-
+//////////////////////////////////////////////////////////////////////
 
 
 
