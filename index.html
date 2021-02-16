@@ -11,7 +11,10 @@
 //PROBABILITY SELECTOR
 ////////////////////////////////////////////////////
 
-
+var decide = function(){
+    var num = parseInt(Math.random() * 10) + 1; // assigns num randomly (1-10)
+    num > 7 ? arp() : arp2(); // if num > 7 call d(), else call e()
+};
 
 
 
@@ -23,11 +26,11 @@ Tone.Transport.bpm.value = 16.25;
 
 const reverb = new Tone.Reverb(10).toDestination();
 
-const delay = new Tone.FeedbackDelay("16n", 0.9).connect(reverb);
+const delay = new Tone.FeedbackDelay("16n.", 0.9).connect(reverb);
 
-const shortReverb = new Tone.Reverb(1).toDestination();
+const shortReverb = new Tone.Reverb(7).toDestination();
 
-const shortDelay = new Tone.FeedbackDelay("32n", 0.2).connect(shortReverb);
+const shortDelay = new Tone.FeedbackDelay("8n.", 0.4).connect(shortReverb);
 
 //////////////////////////////////////////////////////
 // SYNTH INST 1
@@ -37,7 +40,7 @@ const shortDelay = new Tone.FeedbackDelay("32n", 0.2).connect(shortReverb);
 
     "volume": -8,
   "oscillator": {
-    "type": "sawtooth"
+    "type": "triangle"
   },
   "envelope": {
     "attack": 0.8,
@@ -79,7 +82,7 @@ const synth2 = new Tone.Synth({
 
   "volume": -10,
 "oscillator": {
-  "type": "sawtooth"
+  "type": "triangle"
 },
 "envelope": {
   "attack": 0.8,
@@ -120,7 +123,7 @@ const synth3 = new Tone.Synth({
 
   "volume": -9,
 "oscillator": {
-  "type": "sawtooth"
+  "type": "triangle"
 },
 "envelope": {
   "attack": 0.8,
@@ -161,7 +164,7 @@ const synth4 = new Tone.Synth({
 
   "volume": -10,
 "oscillator": {
-  "type": "sawtooth"
+  "type": "triangle"
 },
 "envelope": {
   "attack": 0.8,
@@ -204,7 +207,7 @@ const synth5 = new Tone.Synth({
 
   "volume": -10,
 "oscillator": {
-  "type": "sawtooth"
+  "type": "triangle"
 },
 "envelope": {
   "attack": 0.8,
@@ -249,39 +252,41 @@ const arp = new Tone.MonoSynth({
 
   "volume": 2,
 "oscillator": {
-  "type": "sawtooth"
+  "type": "triangle"
 },
 "envelope": {
   "attack": 0.0,
   "decay": 0.3,
   "sustain": 0.0,
-  "release": 0.2,
+  "release": 0.5,
 },
 "filterEnvelope": {
   "attack": 0.0,
   "decay": 0.3,
   "sustain": 0.0,
-  "release": 0.2,
+  "release": 0.5,
   "baseFrequency": 300,
   "octaves": 4
 }});
 
-arp.connect(shortDelay);
+const pannerA1 = new Tone.Panner(0.5).connect(shortDelay);
+
+arp.connect(pannerA1);
 
 const arpPattern =
-['d#2', 'd#3', 'd#4','g#3', 'g#4','c#3', 'c#4', 'a#2', 'a#3', 'a#4',
-'f#3','f#4'];
+['d#3', 'd#4', 'd#5','g#4', 'g#5','c#4', 'c#5', 'a#4', 'a#3', 'a#5',
+'f#4','f#5'];
 
 var index = 0;
 
 Tone.Transport.scheduleRepeat(time => {
 repeatArp(time);
-}, '64n');
+}, '4n');
 
 function repeatArp(time) {
 let note = arpPattern[Math.floor(Math.random() * arpPattern.length)];
-arp.triggerAttackRelease(note, '64n', time);
-arp.envelope.triggerAttackRelease("64n");
+arp.triggerAttackRelease(note, '4n', time);
+arp.envelope.triggerAttackRelease("4n");
 index++;
 }
 
@@ -293,24 +298,26 @@ const arp2 = new Tone.MonoSynth({
 
   "volume": 2,
 "oscillator": {
-  "type": "sawtooth"
+  "type": "triangle"
 },
 "envelope": {
   "attack": 0.0,
   "decay": 0.3,
   "sustain": 0.0,
-  "release": 0.2,
+  "release": 0.5,
 },
 "filterEnvelope": {
   "attack": 0.0,
   "decay": 0.3,
   "sustain": 0.0,
-  "release": 0.2,
+  "release": 0.5,
   "baseFrequency": 300,
   "octaves": 4
 }});
 
-arp2.connect(shortDelay);
+const pannerA2 = new Tone.Panner(-0.5).connect(shortDelay);
+
+arp2.connect(pannerA2);
 
 const arp2Pattern =
 ['d#2', 'd#3', 'd#4','g#3', 'g#4','c#3', 'c#4', 'a#2', 'a#3', 'a#4',
@@ -320,12 +327,12 @@ var index = 0;
 
 Tone.Transport.scheduleRepeat(time => {
 repeatArp2(time);
-}, '32n');
+}, '8n.');
 
 function repeatArp2(time) {
 let note = arp2Pattern[Math.floor(Math.random() * arp2Pattern.length)];
-arp2.triggerAttackRelease(note, '32n', time);
-arp2.envelope.triggerAttackRelease("32n");
+arp2.triggerAttackRelease(note, '8n.', time);
+arp2.envelope.triggerAttackRelease("8n.");
 index++;
 }
 
