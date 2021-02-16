@@ -3,10 +3,17 @@
 <body>
 
 <button> START </button>
-<script src='main.js'></script>
 <script src='https://cdnjs.cloudflare.com/ajax/libs/tone/14.7.6/Tone.js'></script>
 
 <script>
+
+/////////////////////////////////////////////////////
+//PROBABILITY SELECTOR
+////////////////////////////////////////////////////
+
+
+
+
 
 //////////////////////////////////////////////////////
 // GLOBAL SETUP
@@ -240,7 +247,7 @@ index++;
 
 const arp = new Tone.MonoSynth({
 
-  "volume": 0,
+  "volume": 2,
 "oscillator": {
   "type": "sawtooth"
 },
@@ -278,13 +285,56 @@ arp.envelope.triggerAttackRelease("64n");
 index++;
 }
 
+//////////////////////////////////////////////////////////////////////
+//ARP INST2
+//////////////////////////////////////////////////////////////////////
+
+const arp2 = new Tone.MonoSynth({
+
+  "volume": 2,
+"oscillator": {
+  "type": "sawtooth"
+},
+"envelope": {
+  "attack": 0.0,
+  "decay": 0.3,
+  "sustain": 0.0,
+  "release": 0.2,
+},
+"filterEnvelope": {
+  "attack": 0.0,
+  "decay": 0.3,
+  "sustain": 0.0,
+  "release": 0.2,
+  "baseFrequency": 300,
+  "octaves": 4
+}});
+
+arp2.connect(shortDelay);
+
+const arp2Pattern =
+['d#2', 'd#3', 'd#4','g#3', 'g#4','c#3', 'c#4', 'a#2', 'a#3', 'a#4',
+'f#3','f#4'];
+
+var index = 0;
+
+Tone.Transport.scheduleRepeat(time => {
+repeatArp2(time);
+}, '32n');
+
+function repeatArp2(time) {
+let note = arp2Pattern[Math.floor(Math.random() * arp2Pattern.length)];
+arp2.triggerAttackRelease(note, '32n', time);
+arp2.envelope.triggerAttackRelease("32n");
+index++;
+}
+
 
 //////////////////////////////////////////////////////////////////////
 
   document.querySelector('button')?.addEventListener('click', async () => {
       await Tone.start()
   })
-
 
 
 
