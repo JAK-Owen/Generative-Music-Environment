@@ -3,18 +3,27 @@
 <body>
 
 <button> START </button>
-
+<script src='main.js'></script>
 <script src='https://cdnjs.cloudflare.com/ajax/libs/tone/14.7.6/Tone.js'></script>
 
 <script>
 
+//////////////////////////////////////////////////////
+// GLOBAL SETUP
+//////////////////////////////////////////////////////
 
-Tone.Transport.bpm.value = 32.5;
+Tone.Transport.bpm.value = 16.25;
 
 const reverb = new Tone.Reverb(10).toDestination();
 
 const delay = new Tone.FeedbackDelay("16n", 0.9).connect(reverb);
 
+const shortReverb = new Tone.Reverb(1).toDestination();
+
+const shortDelay = new Tone.FeedbackDelay("32n", 0.2).connect(shortReverb);
+
+//////////////////////////////////////////////////////
+// SYNTH INST 1
 //////////////////////////////////////////////////////
 
   const synth1 = new Tone.Synth({
@@ -226,8 +235,51 @@ index++;
 }
 
 //////////////////////////////////////////////////////////////////////
+//ARP INST1
+//////////////////////////////////////////////////////////////////////
+
+const arp = new Tone.MonoSynth({
+
+  "volume": 0,
+"oscillator": {
+  "type": "sawtooth"
+},
+"envelope": {
+  "attack": 0.0,
+  "decay": 0.3,
+  "sustain": 0.0,
+  "release": 0.2,
+},
+"filterEnvelope": {
+  "attack": 0.0,
+  "decay": 0.3,
+  "sustain": 0.0,
+  "release": 0.2,
+  "baseFrequency": 300,
+  "octaves": 4
+}});
+
+arp.connect(shortDelay);
+
+const arpPattern =
+['d#2', 'd#3', 'd#4','g#3', 'g#4','c#3', 'c#4', 'a#2', 'a#3', 'a#4',
+'f#3','f#4'];
+
+var index = 0;
+
+Tone.Transport.scheduleRepeat(time => {
+repeatArp(time);
+}, '64n');
+
+function repeatArp(time) {
+let note = arpPattern[Math.floor(Math.random() * arpPattern.length)];
+arp.triggerAttackRelease(note, '64n', time);
+arp.envelope.triggerAttackRelease("64n");
+index++;
+}
 
 
+//////////////////////////////////////////////////////////////////////
 
   document.querySelector('button')?.addEventListener('click', async () => {
       await Tone.start()
