@@ -7,30 +7,37 @@
 
 <script>
 
-const key = {
-  cMinor:      ["c2", "d2", "d#2", "f2", "g2", "g#2","a#2"],
-  cSharpMinor: ["c#2", "d#2", "e2", "f#2", "g#2", "a2", "b2"],
-  dMinor:      ["d2", "e2", "f2", "g2", "a2", "a#2", "c2"],
-  dSharpMinor: ["d#2", "e#2", "f#2", "g#2", "a#2", "b2", "c#2"],
-  eMinor:      ["e2", "f#2", "g2", "a2", "b2", "c2", "d2"],
-  fMinor:      ["f2", "g2", "g#2", "a#2", "c2", "c#2", "d#2"],
-  fSharpMinor: ["f#2", "g#2", "a2", "b2", "c#2", "d2", "e2"],
-  gMinor:      ["g2", "a2", "a#2", "c2", "d2", "d#2", "f2"],
-  gSharpMinor: ["g#2", "a#2", "b2", "c#2", "d#2", "e2", "f#2"],
-  aMinor:      ["a2", "b2", "c2", "d2", "e2", "f2", "g2"],
-  aSharpMinor: ["a#2", "b#2", "c#2", "d#2", "e#2", "f#2", "g#2"],
-  bMinor:      ["b2", "c#2", "d2", "e2", "f#2", "g2", "a2"],
 
-   selectKey: function() {
-    console.log(this.bMinor);
-  }
+////////////////////////////////////////////////////////////////////////
+// KEY SELECTOR
+////////////////////////////////////////////////////////////////////////
+
+const key = {
+  cMinor:      ["c2", "d2", "d#2", "f2", "g2", "g#2","a#2","c3", "d3", "d#3", "f3", "g3", "g#3","a#3"],
+  cSharpMinor: ["c#2", "d#2", "e2", "f#2", "g#2", "a2", "b2","c#3", "d#3", "e3", "f#3", "g#3", "a3", "b3"],
+  dMinor:      ["d2", "e2", "f2", "g2", "a2", "a#2", "c2","d3", "e3", "f3", "g3", "a3", "a#3", "c3"],
+  dSharpMinor: ["d#2", "e#2", "f#2", "g#2", "a#2", "b2", "c#2","d#3", "e#3", "f#3", "g#3", "a#3", "b3", "c#3"],
+  eMinor:      ["e2", "f#2", "g2", "a2", "b2", "c2", "d2","e3", "f#3", "g3", "a3", "b3", "c3", "d3"],
+  fMinor:      ["f2", "g2", "g#2", "a#2", "c2", "c#2", "d#2","f3", "g3", "g#3", "a#3", "c3", "c#3", "d#3"],
+  fSharpMinor: ["f#2", "g#2", "a2", "b2", "c#2", "d2", "e2","f#3", "g#3", "a3", "b3", "c#3", "d3", "e3"],
+  gMinor:      ["g2", "a2", "a#2", "c2", "d2", "d#2", "f2","g3", "a3", "a#3", "c3", "d3", "d#3", "f3"],
+  gSharpMinor: ["g#2", "a#2", "b2", "c#2", "d#2", "e2", "f#2","g#3", "a#3", "b3", "c#3", "d#3", "e3", "f#3"],
+  aMinor:      ["a2", "b2", "c2", "d2", "e2", "f2", "g2","a3", "b3", "c3", "d3", "e3", "f3", "g3"],
+  aSharpMinor: ["a#2", "b#2", "c#2", "d#2", "e#2", "f#2", "g#2","a#3", "b#3", "c#3", "d#3", "e#3", "f#3", "g#3"],
+  bMinor:      ["b2", "c#2", "d2", "e2", "f#2", "g2", "a2","b3", "c#3", "d3", "e3", "f#3", "g3", "a3"],
+
 };
 
-key.selectKey();
+
+
+
+const { cMinor } = key;
+
+
 
 
 //////////////////////////////////////////////////////
-// GLOBAL SETUP
+// GLOBAL TRANSPORT AND EFFECTS
 //////////////////////////////////////////////////////
 
 Tone.Transport.bpm.value = 16.25;
@@ -70,8 +77,10 @@ const shortDelay = new Tone.FeedbackDelay("8n.", 0.4).connect(shortReverb);
 
   synth1.connect(delay);
 
-  const pattern1 =
-  ['d#1','d#2', 'd#3', 'd#4'];
+  const pattern1 = key.dMinor;
+
+  console.log(key);
+
 
 var index = 0;
 
@@ -87,263 +96,262 @@ function repeat(time) {
 }
 Tone.Transport.start();
 
-///////////////////////////////////////////////
-
-const synth2 = new Tone.Synth({
-
-  "volume": -10,
-"oscillator": {
-  "type": "triangle"
-},
-"envelope": {
-  "attack": 0.8,
-  "decay": 20.0,
-  "sustain": 0.0,
-  "release": 20.0,
-},
-"filterEnvelope": {
-  "attack": 0.8,
-  "decay": 20.0,
-  "sustain": 0.0,
-  "release": 20.0,
-  "baseFrequency": 300,
-  "octaves": 4
-}});
-
-synth2.connect(delay);
-
-const pattern2 =
-['f#3', 'f#4'];
-
-var index = 0;
-
-Tone.Transport.scheduleRepeat(time => {
-repeat2(time);
-}, '1n');
-
-function repeat2(time) {
-let note = pattern2[Math.floor(Math.random() * pattern2.length)];
-synth2.triggerAttackRelease(note, '1n', time);
-synth2.envelope.triggerAttackRelease("1n");
-index++;
-}
 
 ///////////////////////////////////////////////
 
-const synth3 = new Tone.Synth({
-
-  "volume": -9,
-"oscillator": {
-  "type": "triangle"
-},
-"envelope": {
-  "attack": 0.8,
-  "decay": 20.0,
-  "sustain": 0.0,
-  "release": 20.0,
-},
-"filterEnvelope": {
-  "attack": 0.8,
-  "decay": 20.0,
-  "sustain": 0.0,
-  "release": 20.0,
-  "baseFrequency": 300,
-  "octaves": 4
-}});
-
-synth3.connect(delay);
-
-const pattern3 =
-['a#2', 'a#3', 'a#4'];
-
-var index = 0;
-
-Tone.Transport.scheduleRepeat(time => {
-repeat3(time);
-}, '1n');
-
-function repeat3(time) {
-let note = pattern3[Math.floor(Math.random() * pattern3.length)];
-synth3.triggerAttackRelease(note, '1n', time);
-synth3.envelope.triggerAttackRelease("1n");
-index++;
-}
-
-///////////////////////////////////////////////
-
-const synth4 = new Tone.Synth({
-
-  "volume": -10,
-"oscillator": {
-  "type": "triangle"
-},
-"envelope": {
-  "attack": 0.8,
-  "decay": 20.0,
-  "sustain": 0.0,
-  "release": 20.0,
-},
-"filterEnvelope": {
-  "attack": 0.8,
-  "decay": 20.0,
-  "sustain": 0.0,
-  "release": 20.0,
-  "baseFrequency": 300,
-  "octaves": 4
-}});
-
-const panner4 = new Tone.Panner(-1).connect(delay);
-
-synth4.connect(panner4);
-
-const pattern4 =
-['g#3', 'g#4'];
-
-var index = 0;
-
-Tone.Transport.scheduleRepeat(time => {
-repeat4(time);
-}, '1n');
-
-function repeat4(time) {
-let note = pattern4[Math.floor(Math.random() * pattern4.length)];
-synth4.triggerAttackRelease(note, '1n', time);
-synth4.envelope.triggerAttackRelease("1n");
-index++;
-}
-
-///////////////////////////////////////////////
-
-const synth5 = new Tone.Synth({
-
-  "volume": -10,
-"oscillator": {
-  "type": "triangle"
-},
-"envelope": {
-  "attack": 0.8,
-  "decay": 20.0,
-  "sustain": 0.0,
-  "release": 20.0,
-},
-"filterEnvelope": {
-  "attack": 0.8,
-  "decay": 20.0,
-  "sustain": 0.0,
-  "release": 20.0,
-  "baseFrequency": 300,
-  "octaves": 4
-}});
-
-const panner5 = new Tone.Panner(1).connect(delay);
-
-synth5.connect(panner5);
-
-const pattern5 =
-['c#3', 'c#4'];
-
-var index = 0;
-
-Tone.Transport.scheduleRepeat(time => {
-repeat5(time);
-}, '1n');
-
-function repeat5(time) {
-let note = pattern5[Math.floor(Math.random() * pattern5.length)];
-synth5.triggerAttackRelease(note, '1n', time);
-synth5.envelope.triggerAttackRelease("1n");
-index++;
-}
-
-//////////////////////////////////////////////////////////////////////
-//ARP INST1
-//////////////////////////////////////////////////////////////////////
-
-const arp = new Tone.Synth({
-
-  "volume": 2,
-"oscillator": {
-  "type": "triangle"
-},
-"envelope": {
-  "attack": 0.0,
-  "decay": 0.3,
-  "sustain": 0.0,
-  "release": 0.5,
-},
-"filterEnvelope": {
-  "attack": 0.0,
-  "decay": 0.3,
-  "sustain": 0.0,
-  "release": 0.5,
-  "baseFrequency": 300,
-  "octaves": 4
-}});
-
-const pannerA1 = new Tone.Panner(0.5).connect(shortDelay);
-
-arp.connect(pannerA1);
-
-const arpPattern =
-['d#3', 'd#4', 'd#5','g#4', 'g#5','c#4', 'c#5', 'a#4', 'a#3', 'a#5',
-'f#4','f#5'];
-
-var index = 0;
-
-Tone.Transport.scheduleRepeat(time => {
-repeatArp(time);
-}, '4n');
-
-function repeatArp(time) {
-let note = arpPattern[Math.floor(Math.random() * arpPattern.length)];
-arp.triggerAttackRelease(note, '4n', time);
-arp.envelope.triggerAttackRelease("4n");
-index++;
-}
-
-//////////////////////////////////////////////////////////////////////
-
-const arp2 = new Tone.Synth({
-
-  "volume": 2,
-"oscillator": {
-  "type": "triangle"
-},
-"envelope": {
-  "attack": 0.0,
-  "decay": 0.3,
-  "sustain": 0.0,
-  "release": 0.5,
-},
-"filterEnvelope": {
-  "attack": 0.0,
-  "decay": 0.3,
-  "sustain": 0.0,
-  "release": 0.5,
-  "baseFrequency": 300,
-  "octaves": 4
-}});
-
-const pannerA2 = new Tone.Panner(-0.5).connect(shortDelay);
-
-arp2.connect(pannerA2);
-
-const arp2Pattern =
-['d#2', 'd#3', 'd#4','g#3', 'g#4','c#3', 'c#4', 'a#2', 'a#3', 'a#4',
-'f#3','f#4'];
-
-var index = 0;
-
-Tone.Transport.scheduleRepeat(time => {
-repeatArp2(time);
-}, '8n.');
-
-function repeatArp2(time) {
-let note = arp2Pattern[Math.floor(Math.random() * arp2Pattern.length)];
-arp2.triggerAttackRelease(note, '8n.', time);
-arp2.envelope.triggerAttackRelease("8n.");
-index++;
-}
+// const synth2 = new Tone.Synth({
+//
+//   "volume": -10,
+// "oscillator": {
+//   "type": "triangle"
+// },
+// "envelope": {
+//   "attack": 0.8,
+//   "decay": 20.0,
+//   "sustain": 0.0,
+//   "release": 20.0,
+// },
+// "filterEnvelope": {
+//   "attack": 0.8,
+//   "decay": 20.0,
+//   "sustain": 0.0,
+//   "release": 20.0,
+//   "baseFrequency": 300,
+//   "octaves": 4
+// }});
+//
+// synth2.connect(delay);
+//
+// const pattern2 = key;
+//
+//
+// var index = 0;
+//
+// Tone.Transport.scheduleRepeat(time => {
+// repeat2(time);
+// }, '1n');
+//
+// function repeat2(time) {
+// let note = pattern2[Math.floor(Math.random() * pattern2.length)];
+// synth2.triggerAttackRelease(note, '1n', time);
+// synth2.envelope.triggerAttackRelease("1n");
+// index++;
+// }
+//
+// ///////////////////////////////////////////////
+//
+// const synth3 = new Tone.Synth({
+//
+//   "volume": -9,
+// "oscillator": {
+//   "type": "triangle"
+// },
+// "envelope": {
+//   "attack": 0.8,
+//   "decay": 20.0,
+//   "sustain": 0.0,
+//   "release": 20.0,
+// },
+// "filterEnvelope": {
+//   "attack": 0.8,
+//   "decay": 20.0,
+//   "sustain": 0.0,
+//   "release": 20.0,
+//   "baseFrequency": 300,
+//   "octaves": 4
+// }});
+//
+// synth3.connect(delay);
+//
+// const pattern3 = key;
+//
+//
+// var index = 0;
+//
+// Tone.Transport.scheduleRepeat(time => {
+// repeat3(time);
+// }, '1n');
+//
+// function repeat3(time) {
+// let note = pattern3[Math.floor(Math.random() * pattern3.length)];
+// synth3.triggerAttackRelease(note, '1n', time);
+// synth3.envelope.triggerAttackRelease("1n");
+// index++;
+// }
+//
+// ///////////////////////////////////////////////
+//
+// const synth4 = new Tone.Synth({
+//
+//   "volume": -10,
+// "oscillator": {
+//   "type": "triangle"
+// },
+// "envelope": {
+//   "attack": 0.8,
+//   "decay": 20.0,
+//   "sustain": 0.0,
+//   "release": 20.0,
+// },
+// "filterEnvelope": {
+//   "attack": 0.8,
+//   "decay": 20.0,
+//   "sustain": 0.0,
+//   "release": 20.0,
+//   "baseFrequency": 300,
+//   "octaves": 4
+// }});
+//
+// const panner4 = new Tone.Panner(-1).connect(delay);
+//
+// synth4.connect(panner4);
+//
+// const pattern4 = key;
+//
+//
+// var index = 0;
+//
+// Tone.Transport.scheduleRepeat(time => {
+// repeat4(time);
+// }, '1n');
+//
+// function repeat4(time) {
+// let note = pattern4[Math.floor(Math.random() * pattern4.length)];
+// synth4.triggerAttackRelease(note, '1n', time);
+// synth4.envelope.triggerAttackRelease("1n");
+// index++;
+// }
+//
+// ///////////////////////////////////////////////
+//
+// const synth5 = new Tone.Synth({
+//
+//   "volume": -10,
+// "oscillator": {
+//   "type": "triangle"
+// },
+// "envelope": {
+//   "attack": 0.8,
+//   "decay": 20.0,
+//   "sustain": 0.0,
+//   "release": 20.0,
+// },
+// "filterEnvelope": {
+//   "attack": 0.8,
+//   "decay": 20.0,
+//   "sustain": 0.0,
+//   "release": 20.0,
+//   "baseFrequency": 300,
+//   "octaves": 4
+// }});
+//
+// const panner5 = new Tone.Panner(1).connect(delay);
+//
+// synth5.connect(panner5);
+//
+// const pattern5 = key;
+//
+//
+// var index = 0;
+//
+// Tone.Transport.scheduleRepeat(time => {
+// repeat5(time);
+// }, '1n');
+//
+// function repeat5(time) {
+// let note = pattern5[Math.floor(Math.random() * pattern5.length)];
+// synth5.triggerAttackRelease(note, '1n', time);
+// synth5.envelope.triggerAttackRelease("1n");
+// index++;
+// }
+//
+// //////////////////////////////////////////////////////////////////////
+// //ARP INST1
+// //////////////////////////////////////////////////////////////////////
+//
+// const arp = new Tone.Synth({
+//
+//   "volume": 2,
+// "oscillator": {
+//   "type": "triangle"
+// },
+// "envelope": {
+//   "attack": 0.0,
+//   "decay": 0.3,
+//   "sustain": 0.0,
+//   "release": 0.5,
+// },
+// "filterEnvelope": {
+//   "attack": 0.0,
+//   "decay": 0.3,
+//   "sustain": 0.0,
+//   "release": 0.5,
+//   "baseFrequency": 300,
+//   "octaves": 4
+// }});
+//
+// const pannerA1 = new Tone.Panner(0.5).connect(shortDelay);
+//
+// arp.connect(pannerA1);
+//
+// const arpPattern = key;
+//
+//
+// var index = 0;
+//
+// Tone.Transport.scheduleRepeat(time => {
+// repeatArp(time);
+// }, '4n');
+//
+// function repeatArp(time) {
+// let note = arpPattern[Math.floor(Math.random() * arpPattern.length)];
+// arp.triggerAttackRelease(note, '4n', time);
+// arp.envelope.triggerAttackRelease("4n");
+// index++;
+// }
+//
+// //////////////////////////////////////////////////////////////////////
+//
+// const arp2 = new Tone.Synth({
+//
+//   "volume": 2,
+// "oscillator": {
+//   "type": "triangle"
+// },
+// "envelope": {
+//   "attack": 0.0,
+//   "decay": 0.3,
+//   "sustain": 0.0,
+//   "release": 0.5,
+// },
+// "filterEnvelope": {
+//   "attack": 0.0,
+//   "decay": 0.3,
+//   "sustain": 0.0,
+//   "release": 0.5,
+//   "baseFrequency": 300,
+//   "octaves": 4
+// }});
+//
+// const pannerA2 = new Tone.Panner(-0.5).connect(shortDelay);
+//
+// arp2.connect(pannerA2);
+//
+// const arp2Pattern = key;
+//
+//
+// var index = 0;
+//
+// Tone.Transport.scheduleRepeat(time => {
+// repeatArp2(time);
+// }, '8n.');
+//
+// function repeatArp2(time) {
+// let note = arp2Pattern[Math.floor(Math.random() * arp2Pattern.length)];
+// arp2.triggerAttackRelease(note, '8n.', time);
+// arp2.envelope.triggerAttackRelease("8n.");
+// index++;
+// }
 
 //////////////////////////////////////////////////////////////////////
 
