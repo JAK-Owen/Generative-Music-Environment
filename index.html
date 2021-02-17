@@ -7,15 +7,26 @@
 
 <script>
 
-/////////////////////////////////////////////////////
-//PROBABILITY SELECTOR
-////////////////////////////////////////////////////
+const key = {
+  cMinor:      ["c2", "d2", "d#2", "f2", "g2", "g#2","a#2"],
+  cSharpMinor: ["c#2", "d#2", "e2", "f#2", "g#2", "a2", "b2"],
+  dMinor:      ["d2", "e2", "f2", "g2", "a2", "a#2", "c2"],
+  dSharpMinor: ["d#2", "e#2", "f#2", "g#2", "a#2", "b2", "c#2"],
+  eMinor:      ["e2", "f#2", "g2", "a2", "b2", "c2", "d2"],
+  fMinor:      ["f2", "g2", "g#2", "a#2", "c2", "c#2", "d#2"],
+  fSharpMinor: ["f#2", "g#2", "a2", "b2", "c#2", "d2", "e2"],
+  gMinor:      ["g2", "a2", "a#2", "c2", "d2", "d#2", "f2"],
+  gSharpMinor: ["g#2", "a#2", "b2", "c#2", "d#2", "e2", "f#2"],
+  aMinor:      ["a2", "b2", "c2", "d2", "e2", "f2", "g2"],
+  aSharpMinor: ["a#2", "b#2", "c#2", "d#2", "e#2", "f#2", "g#2"],
+  bMinor:      ["b2", "c#2", "d2", "e2", "f#2", "g2", "a2"],
 
-var decide = function(){
-    var num = parseInt(Math.random() * 10) + 1; // assigns num randomly (1-10)
-    num > 7 ? arp() : arp2(); // if num > 7 call d(), else call e()
+   selectKey: function() {
+    console.log(this.bMinor);
+  }
 };
 
+key.selectKey();
 
 
 //////////////////////////////////////////////////////
@@ -248,7 +259,7 @@ index++;
 //ARP INST1
 //////////////////////////////////////////////////////////////////////
 
-const arp = new Tone.MonoSynth({
+const arp = new Tone.Synth({
 
   "volume": 2,
 "oscillator": {
@@ -291,10 +302,8 @@ index++;
 }
 
 //////////////////////////////////////////////////////////////////////
-//ARP INST2
-//////////////////////////////////////////////////////////////////////
 
-const arp2 = new Tone.MonoSynth({
+const arp2 = new Tone.Synth({
 
   "volume": 2,
 "oscillator": {
@@ -335,7 +344,6 @@ arp2.triggerAttackRelease(note, '8n.', time);
 arp2.envelope.triggerAttackRelease("8n.");
 index++;
 }
-
 
 //////////////////////////////////////////////////////////////////////
 
