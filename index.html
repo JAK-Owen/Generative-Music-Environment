@@ -30,12 +30,24 @@ const key = {
 
 
 
+////////////////////////////////////////////////////////////////////////
+// WAVEFORM SELECTOR
+////////////////////////////////////////////////////////////////////////
 
+const waveform = {
+  sine:     "sine",
+  triangle: "triangle",
+  square:   "square",
+  saw:      "sawtooth",
 
+};
 
-const scale = key.cMinor;
+////////////////////////////////////////////////////////////////////////
+// GLOBAL SELECTORS
+////////////////////////////////////////////////////////////////////////
 
-
+const scale = key.aMinor;
+const wave = waveform.square;
 
 
 //////////////////////////////////////////////////////
@@ -60,7 +72,7 @@ const shortDelay = new Tone.FeedbackDelay("8n.", 0.4).connect(shortReverb);
 
     "volume": -8,
   "oscillator": {
-    "type": "triangle"
+    "type": wave
   },
   "envelope": {
     "attack": 0.8,
@@ -105,7 +117,7 @@ const synth2 = new Tone.Synth({
 
   "volume": -10,
 "oscillator": {
-  "type": "triangle"
+  "type": wave
 },
 "envelope": {
   "attack": 0.8,
@@ -146,7 +158,7 @@ const synth3 = new Tone.Synth({
 
   "volume": -9,
 "oscillator": {
-  "type": "triangle"
+  "type": wave
 },
 "envelope": {
   "attack": 0.8,
@@ -187,7 +199,7 @@ const synth4 = new Tone.Synth({
 
   "volume": -10,
 "oscillator": {
-  "type": "triangle"
+  "type": wave
 },
 "envelope": {
   "attack": 0.8,
@@ -230,7 +242,7 @@ const synth5 = new Tone.Synth({
 
   "volume": -10,
 "oscillator": {
-  "type": "triangle"
+  "type": wave
 },
 "envelope": {
   "attack": 0.8,
@@ -275,7 +287,7 @@ index++;
 //
 //   "volume": 2,
 // "oscillator": {
-//   "type": "triangle"
+//   "type": wave
 // },
 // "envelope": {
 //   "attack": 0.0,
@@ -318,7 +330,7 @@ index++;
 //
 //   "volume": 2,
 // "oscillator": {
-//   "type": "triangle"
+//   "type": wave
 // },
 // "envelope": {
 //   "attack": 0.0,
