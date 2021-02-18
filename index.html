@@ -28,8 +28,6 @@ const key = {
 
 };
 
-
-
 ////////////////////////////////////////////////////////////////////////
 // WAVEFORM SELECTOR
 ////////////////////////////////////////////////////////////////////////
@@ -43,18 +41,33 @@ const waveform = {
 };
 
 ////////////////////////////////////////////////////////////////////////
+// DURATION SELECTOR
+////////////////////////////////////////////////////////////////////////
+
+const duration = {
+  "1" : "1n",
+  "2" : "2n",
+  "4" : "4n",
+  "8" : "8n",
+  "16": "16n",
+  "32": "32n",
+  "64": "64n"
+
+};
+
+////////////////////////////////////////////////////////////////////////
 // GLOBAL SELECTORS
 ////////////////////////////////////////////////////////////////////////
 
+Tone.Transport.bpm.value = 16.25;
 const scale = key.aMinor;
 const wave = waveform.square;
+const noteDuration = duration[1];
 
 
 //////////////////////////////////////////////////////
-// GLOBAL TRANSPORT AND EFFECTS
+// GLOBAL EFFECTS
 //////////////////////////////////////////////////////
-
-Tone.Transport.bpm.value = 16.25;
 
 const reverb = new Tone.Reverb(10).toDestination();
 
@@ -100,12 +113,12 @@ var index = 0;
 
 Tone.Transport.scheduleRepeat(time => {
   repeat(time);
-}, '1n');
+}, noteDuration);
 
 function repeat(time) {
   let note = pattern1[Math.floor(Math.random() * pattern1.length)];
-  synth1.triggerAttackRelease(note, '1n', time);
-  synth1.envelope.triggerAttackRelease("1n");
+  synth1.triggerAttackRelease(note, noteDuration, time);
+  synth1.envelope.triggerAttackRelease(noteDuration);
   index++;
 }
 Tone.Transport.start();
@@ -143,12 +156,12 @@ var index = 0;
 
 Tone.Transport.scheduleRepeat(time => {
 repeat2(time);
-}, '1n');
+}, noteDuration);
 
 function repeat2(time) {
 let note = pattern2[Math.floor(Math.random() * pattern2.length)];
-synth2.triggerAttackRelease(note, '1n', time);
-synth2.envelope.triggerAttackRelease("1n");
+synth2.triggerAttackRelease(note, noteDuration, time);
+synth2.envelope.triggerAttackRelease(noteDuration);
 index++;
 }
 
@@ -184,12 +197,12 @@ var index = 0;
 
 Tone.Transport.scheduleRepeat(time => {
 repeat3(time);
-}, '1n');
+}, noteDuration);
 
 function repeat3(time) {
 let note = pattern3[Math.floor(Math.random() * pattern3.length)];
-synth3.triggerAttackRelease(note, '1n', time);
-synth3.envelope.triggerAttackRelease("1n");
+synth3.triggerAttackRelease(note, noteDuration, time);
+synth3.envelope.triggerAttackRelease(noteDuration);
 index++;
 }
 
@@ -227,12 +240,12 @@ var index = 0;
 
 Tone.Transport.scheduleRepeat(time => {
 repeat4(time);
-}, '1n');
+}, noteDuration);
 
 function repeat4(time) {
 let note = pattern4[Math.floor(Math.random() * pattern4.length)];
-synth4.triggerAttackRelease(note, '1n', time);
-synth4.envelope.triggerAttackRelease("1n");
+synth4.triggerAttackRelease(note, noteDuration, time);
+synth4.envelope.triggerAttackRelease(noteDuration);
 index++;
 }
 
@@ -270,12 +283,12 @@ var index = 0;
 
 Tone.Transport.scheduleRepeat(time => {
 repeat5(time);
-}, '1n');
+}, noteDuration);
 
 function repeat5(time) {
 let note = pattern5[Math.floor(Math.random() * pattern5.length)];
-synth5.triggerAttackRelease(note, '1n', time);
-synth5.envelope.triggerAttackRelease("1n");
+synth5.triggerAttackRelease(note, noteDuration, time);
+synth5.envelope.triggerAttackRelease(noteDuration);
 index++;
 }
 
