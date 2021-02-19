@@ -28,6 +28,10 @@
 
    <div id="oscilloscope"></div>
 
+   <div id="verb">R e v e r b</div>
+
+   <div id="FBDelay">D e l a y</div>
+
 <script>
 
 
@@ -414,6 +418,41 @@ oscilloscope.colorize("fill","black")
 document.body.style.backgroundColor = "#000"
 
 oscilloscope.connect(reverb);
+
+const verb = new Nexus.Dial("#verb",{
+
+  'size': [75,75],
+  'interaction': 'vertical',
+  'mode': 'relative',
+})
+ verb.on('change',function(v) {
+	reverb.wet.rampTo(v,.1)
+});
+verb.min = 0;
+verb.max = 1;
+verb.value = 0.8;
+verb.colorize("accent","white")
+verb.colorize("fill","#333")
+document.body.style.backgroundColor = "#000"
+
+
+const FBDelay = new Nexus.Dial("#FBDelay",{
+
+  'size': [75,75],
+  'interaction': 'vertical',
+  'mode': 'relative',
+})
+ FBDelay.on('change',function(v) {
+	delay.wet.rampTo(v,.1)
+});
+FBDelay.min = 0;
+FBDelay.max = 1;
+FBDelay.value = 0.9;
+FBDelay.colorize("accent","white")
+FBDelay.colorize("fill","#333")
+document.body.style.backgroundColor = "#000"
+
+
 
 
 </script>
