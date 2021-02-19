@@ -1,0 +1,22 @@
+body {
+  background-color: black;
+
+}
+
+#oscilloscope {
+  position:absolute;
+  height:100%;
+  width: auto;
+  border:3px solid white;
+  top:calc(30% - 100px);
+  left:calc(50% - 200px);
+  overflow:hidden;
+  z-index: 1;
+  -webkit-animation-name: fade;
+  -webkit-animation-duration: 1.5s;
+  animation-name: fade;
+  animation-duration: 1.5s;
+}
+
+
+}
