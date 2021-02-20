@@ -72,13 +72,22 @@ const waveform = {
 ////////////////////////////////////////////////////////////////////////
 
 const duration = {
-  "1" : "1n",
-  "2" : "2n",
-  "4" : "4n",
-  "8" : "8n",
-  "16": "16n",
-  "32": "32n",
-  "64": "64n"
+
+// N = BEATS
+// M = MESSURES
+
+  "16": "16m",
+  "8" : "8m",
+  "4" : "4m",
+  "2" : "2m",
+  "1" : "1m",
+  "1/4" : "1n",
+  "2/4" : "2n",
+  "4/4" : "4n",
+  "8/4" : "8n",
+  "16/4": "16n",
+  "32/4": "32n",
+  "64/4": "64n"
 
 };
 
@@ -86,10 +95,10 @@ const duration = {
 // GLOBAL SELECTORS
 ////////////////////////////////////////////////////////////////////////
 
-Tone.Transport.bpm.value = 16.25;
+Tone.Transport.bpm.value = 132;
 const scale = key.dSharpMinor;
 const wave = waveform.saw;
-const noteDuration = duration[1];
+const noteDuration = duration[16];
 
 
 //////////////////////////////////////////////////////
@@ -98,11 +107,11 @@ const noteDuration = duration[1];
 
 const reverb = new Tone.Reverb(10).toDestination();
 
-const delay = new Tone.FeedbackDelay("16n.", 0.9).connect(reverb);
+const delay = new Tone.FeedbackDelay("1m.", 0.9).connect(reverb);
 
 const shortReverb = new Tone.Reverb(7).toDestination();
 
-const shortDelay = new Tone.FeedbackDelay("8n.", 0.4).connect(shortReverb);
+const shortDelay = new Tone.FeedbackDelay("1m.", 0.4).connect(shortReverb);
 
 //////////////////////////////////////////////////////
 // SYNTH INST 1
