@@ -5,6 +5,7 @@
 <script src='https://cdnjs.cloudflare.com/ajax/libs/tone/14.7.6/Tone.js'></script>
 <script type="text/javascript" src="https://unpkg.com/@tonejs/ui@0.0.8/build/tonejs-ui.js"></script>
 <script src= 'https://cdn.jsdelivr.net/npm/nexusui@latest/dist/NexusUI.js'></script>
+<script src="https://code.iconify.design/1/1.0.7/iconify.min.js"></script>
 <link rel="stylesheet" href="styleSheet.css">
 
 
@@ -28,11 +29,19 @@
 
    <div id="oscilloscope"></div>
 
+   <div id="gain">V o l u m e</div>
+
+   <div id="LPFilter"> L o w P a s s</div>
+
+   <div id="HPFilter">H i g h P a s s</div>
+
    <div id="verb">R e v e r b</div>
 
    <div id="FBDelay">D e l a y</div>
 
+
 <script>
+
 
 
 ////////////////////////////////////////////////////////////////////////
@@ -95,7 +104,7 @@ const duration = {
 // GLOBAL SELECTORS
 ////////////////////////////////////////////////////////////////////////
 
-Tone.Transport.bpm.value = 132;
+Tone.Transport.bpm.value = 132.142;
 const scale = key.dSharpMinor;
 const wave = waveform.saw;
 const noteDuration = duration[16];
@@ -105,11 +114,17 @@ const noteDuration = duration[16];
 // GLOBAL EFFECTS
 //////////////////////////////////////////////////////
 
-const reverb = new Tone.Reverb(10).toDestination();
+const volume = new Tone.Volume(-Infinity).toDestination();
+
+const LPfilter = new Tone.Filter(550, "lowpass").connect(volume);
+
+const HPfilter = new Tone.Filter(550, "highpass").connect(LPfilter);
+
+const reverb = new Tone.Reverb(10).connect(HPfilter);
 
 const delay = new Tone.FeedbackDelay("1m.", 0.9).connect(reverb);
 
-const shortReverb = new Tone.Reverb(7).toDestination();
+const shortReverb = new Tone.Reverb(7).connect(HPfilter);
 
 const shortDelay = new Tone.FeedbackDelay("1m.", 0.4).connect(shortReverb);
 
@@ -444,6 +459,59 @@ verb.colorize("accent","white")
 verb.colorize("fill","#333")
 document.body.style.backgroundColor = "#000"
 
+const gain = new Nexus.Dial("#gain",{
+
+  'size': [75,75],
+  'interaction': 'vertical',
+  'mode': 'relative',
+})
+ gain.on('change',function(v) {
+	volume.volume.rampTo(v,.1)
+});
+gain.min = -50;
+gain.max = 0;
+gain.value = -6;
+gain.colorize("accent","white")
+gain.colorize("fill","#333")
+document.body.style.backgroundColor = "#000"
+
+
+
+
+const LPFilter = new Nexus.Dial("#LPFilter",{
+
+  'size': [75,75],
+  'interaction': 'vertical',
+  'mode': 'relative',
+})
+ LPFilter.on('change',function(v) {
+	LPfilter.frequency.rampTo(v,.1)
+});
+LPFilter.min = 20;
+LPFilter.max = 550;
+LPFilter.value = 550;
+LPFilter.colorize("accent","white")
+LPFilter.colorize("fill","#333")
+document.body.style.backgroundColor = "#000"
+
+
+const HPFilter = new Nexus.Dial("#HPFilter",{
+
+  'size': [75,75],
+  'interaction': 'vertical',
+  'mode': 'relative',
+})
+ HPFilter.on('change',function(v) {
+	HPfilter.frequency.rampTo(v,.1)
+});
+HPFilter.min = 20;
+HPFilter.max = 650;
+HPFilter.value = 20;
+HPFilter.colorize("accent","white")
+HPFilter.colorize("fill","#333")
+document.body.style.backgroundColor = "#000"
+
+
 
 const FBDelay = new Nexus.Dial("#FBDelay",{
 
@@ -460,6 +528,7 @@ FBDelay.value = 0.9;
 FBDelay.colorize("accent","white")
 FBDelay.colorize("fill","#333")
 document.body.style.backgroundColor = "#000"
+
 
 
 

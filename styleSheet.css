@@ -18,13 +18,50 @@ body {
   animation-duration: 1.5s;
 }
 
+#gain {
+ position: absolute;
+ color: white;
+ padding: 10px;
+ top: 400px;
+ left:calc(50% - 200px);
+ font-family: monospace;
+ font-weight: lighter;
+ font-size: 8px;
+
+}
+
+
+#LPFilter {
+  position: relative;
+  left: 100px;
+  color: white;
+  padding: 10px;
+  top: 257px;
+  left:calc(50% - 100px);
+  font-family: monospace;
+  font-weight: lighter;
+  font-size: 8px;
+}
+
+#HPFilter {
+  position: relative;
+  left: 200px;
+  color: white;
+  padding: 10px;
+  top: 163px;
+  left:calc(50% - 0px);
+  font-family: monospace;
+  font-weight: lighter;
+  font-size: 8px;
+}
+
 
 #verb {
   position: relative;
   left: 300px;
   color: white;
   padding: 10px;
-  top: 300px;
+  top: 68px;
   left:calc(50% - -100px);
   font-family: monospace;
   font-weight: lighter;
@@ -36,9 +73,23 @@ body {
   left: 400px;
   color: white;
   padding: 10px;
-  top: 300px;
+  top: 80px;
   left:calc(50% - -100px);
   font-family: monospace;
   font-weight: lighter;
   font-size: 8px;
+}
+
+
+
+
+
+@-webkit-keyframes fade {
+  from {opacity: .4}
+  to {opacity: 1}
+}
+
+@keyframes fade {
+  from {opacity: .4}
+  to {opacity: 1}
 }
